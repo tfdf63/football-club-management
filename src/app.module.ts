@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { PlayersModule } from './players/players.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [], // Пока пусто, добавим сущности позже
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        // entities: [User], // Добавил сущность User
         synchronize: true, // Только для разработки! Автоматически создает таблицы
         logging: true,
       }),
@@ -34,6 +36,8 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
 
     AuthModule,
+
+    PlayersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

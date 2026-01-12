@@ -27,7 +27,7 @@ import { PlayersModule } from './players/players.module';
         database: configService.get('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         // entities: [User], // Добавил сущность User
-        synchronize: true, // Только для разработки! Автоматически создает таблицы
+        // synchronize: true, // Только для разработки! Автоматически создает таблицы
         logging: true,
       }),
       inject: [ConfigService],

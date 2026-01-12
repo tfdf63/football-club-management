@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePlayerDto } from './players.dto';
 
 @Injectable()
 export class PlayersService {
@@ -10,7 +11,8 @@ export class PlayersService {
     return { id };
   }
 
-  create(createPlayerDto: any) {
-    return { message: 'Player created' };
+  create(createPlayerDto: CreatePlayerDto) {
+    // TODO: Implement player creation logic
+    return { message: 'Player created', data: createPlayerDto };
   }
 }

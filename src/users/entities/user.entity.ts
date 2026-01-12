@@ -8,7 +8,7 @@ import {
 
 @Entity('users') // Название таблицы в БД
 export class User {
-  @PrimaryGeneratedColumn() // Автоинкремент ID
+  @PrimaryGeneratedColumn() // ID
   id: number;
 
   @Column({ unique: true }) // Уникальный email

@@ -34,3 +34,6 @@ Thumbs.db
 # Логи
 logs/
 *.log
+
+# Остальное
+stg.md

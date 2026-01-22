@@ -13,7 +13,13 @@ async function bootstrap() {
   });
 
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Удаляет поля, которых нет в DTO
+      forbidNonWhitelisted: true, // Бросает ошибку, если есть лишние поля
+      transform: true, // Автоматически преобразует типы
+    }),
+  );
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

@@ -36,3 +36,6 @@ export class User {
   @UpdateDateColumn() // Автоматически обновляется при изменении
   updatedAt: Date;
 }
+
+// Тип для пользователя без пароля (используется в JWT)
+export type UserWithoutPassword = Omit<User, 'password'>;

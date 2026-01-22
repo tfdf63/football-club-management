@@ -1,18 +1,28 @@
-import { IsString } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  MinLength,
+  IsEnum,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateUsersDto {
-  @IsString()
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsString()
+  @MinLength(6)
   password: string;
 
-  @IsString()
+  @IsEnum(['director', 'scout', 'coach', 'admin'])
   role: string;
 
   @IsString()
+  @IsNotEmpty()
   firstName: string;
 
   @IsString()
+  @IsNotEmpty()
   lastName: string;
 }

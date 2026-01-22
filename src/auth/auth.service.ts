@@ -4,8 +4,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
 import { UsersService } from 'src/users/users.service';
+import { PasswordService } from 'src/common/services/password.service';
 import { RegisterDto } from './auth.dto/register.dto';
 import { LoginDto } from './auth.dto/login.dto';
 
@@ -14,6 +14,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private passwordService: PasswordService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -25,7 +26,9 @@ export class AuthService {
     }
 
     // Хешируем пароль
-    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+    const hashedPassword = await this.passwordService.hash(
+      registerDto.password,
+    );
 
     // Создаем пользователя с захешированным паролем
     const user = await this.usersService.create({
@@ -58,7 +61,7 @@ export class AuthService {
     }
 
     // 2. Проверяем пароль
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await this.passwordService.compare(
       loginDto.password,
       user.password,
     );

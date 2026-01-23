@@ -51,7 +51,6 @@ export class UsersController {
     return this.usersService.updateCurrentUser(user.id, updateUserDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('roles')
   getRoles() {
     return {

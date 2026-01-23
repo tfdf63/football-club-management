@@ -1,0 +1,31 @@
+export interface Position {
+	full: string
+	short: string
+}
+
+export interface Anthropometry {
+	height: number
+	weight: number
+}
+
+export interface Player {
+	id: number
+	full_name: string
+	date_of_birth: string
+	transfermarkt_link: string
+	photo_url: string
+	country: string
+	city: string
+	league: string
+	club: string
+	youth_academy: string
+	main_position: Position | string
+	position_2: Position | string
+	position_3: Position | string
+	anthropometry: Anthropometry
+	foot: 'right' | 'left'
+	contract_expires: string | null
+	current_level: number
+	potential: number
+	shortlist: boolean
+}

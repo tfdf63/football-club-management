@@ -1,19 +1,28 @@
 import { PlayerPosition } from '../enums/player-position.enum';
 import { PlayerFoot } from '../enums/player-foot.enum';
+import { CountryEnum } from '../enums/country.enum';
 
 export class PlayerResponseDto {
   id: number;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   dateOfBirth: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  transfermarktLink: string | null;
+  photoUrl: string | null;
+  country: CountryEnum;
+  city: string | null;
+  league: string | null;
+  club: string | null;
+  youthAcademy: string | null;
+  mainPosition: PlayerPosition;
+  position2: PlayerPosition | null;
+  position3: PlayerPosition | null;
   height: number;
   weight: number;
-  position1: PlayerPosition;
-  position2?: PlayerPosition;
-  position3?: PlayerPosition;
-  country: string;
-  club?: string;
   foot: PlayerFoot;
+  contractExpires: Date | null;
+  currentLevel: number;
+  potential: number;
+  shortlist: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

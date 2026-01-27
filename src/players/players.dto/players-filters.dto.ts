@@ -8,7 +8,7 @@ import {
   Min,
   Max,
 } from 'class-validator';
-import { Type, Transform } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { PlayerPosition } from '../enums/player-position.enum';
 import { PlayerFoot } from '../enums/player-foot.enum';
 import { CountryEnum } from '../enums/country.enum';
@@ -53,9 +53,14 @@ export class PlayersFiltersDto {
   @IsEnum(PlayerFoot)
   foot?: PlayerFoot;
 
+  // Диапазоны для contractExpires
   @IsOptional()
   @IsDateString()
-  contractExpires?: string; // формат 'YYYY-MM-DD'
+  contractExpiresFrom?: string; // формат 'YYYY-MM-DD'
+
+  @IsOptional()
+  @IsDateString()
+  contractExpiresTo?: string; // формат 'YYYY-MM-DD'
 
   // Числовые фильтры (диапазоны)
   @IsOptional()
@@ -72,19 +77,35 @@ export class PlayersFiltersDto {
   @Max(100)
   ageTo?: number;
 
+  // Диапазоны для height
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(100)
   @Max(250)
-  height?: number; // точное значение в см
+  heightFrom?: number; // минимальный рост в см
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(100)
+  @Max(250)
+  heightTo?: number; // максимальный рост в см
+
+  // Диапазоны для weight
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(30)
+  @Max(200)
+  weightFrom?: number; // минимальный вес в кг
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(30)
   @Max(200)
-  weight?: number; // точное значение в кг
+  weightTo?: number; // максимальный вес в кг
 
   @IsOptional()
   @Type(() => Number)

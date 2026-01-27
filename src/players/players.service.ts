@@ -54,9 +54,19 @@ export class PlayersService {
       queryBuilder.setParameter('foot', filters.foot);
     }
 
-    if (filters?.contractExpires) {
-      queryBuilder.andWhere('player.contractExpires = :contractExpires');
-      queryBuilder.setParameter('contractExpires', filters.contractExpires);
+    // Диапазоны для contractExpires
+    if (filters?.contractExpiresFrom !== undefined) {
+      const contractExpiresFromDate = new Date(filters.contractExpiresFrom);
+      contractExpiresFromDate.setHours(0, 0, 0, 0);
+      queryBuilder.andWhere('player.contractExpires >= :contractExpiresFrom');
+      queryBuilder.setParameter('contractExpiresFrom', contractExpiresFromDate);
+    }
+
+    if (filters?.contractExpiresTo !== undefined) {
+      const contractExpiresToDate = new Date(filters.contractExpiresTo);
+      contractExpiresToDate.setHours(23, 59, 59, 999);
+      queryBuilder.andWhere('player.contractExpires <= :contractExpiresTo');
+      queryBuilder.setParameter('contractExpiresTo', contractExpiresToDate);
     }
 
     // Фильтр по возрасту (вычисляется на основе dateOfBirth)
@@ -103,15 +113,26 @@ export class PlayersService {
       }
     }
 
-    // Точные числовые значения
-    if (filters?.height !== undefined) {
-      queryBuilder.andWhere('player.height = :height');
-      queryBuilder.setParameter('height', filters.height);
+    // Диапазоны для height
+    if (filters?.heightFrom !== undefined) {
+      queryBuilder.andWhere('player.height >= :heightFrom');
+      queryBuilder.setParameter('heightFrom', filters.heightFrom);
     }
 
-    if (filters?.weight !== undefined) {
-      queryBuilder.andWhere('player.weight = :weight');
-      queryBuilder.setParameter('weight', filters.weight);
+    if (filters?.heightTo !== undefined) {
+      queryBuilder.andWhere('player.height <= :heightTo');
+      queryBuilder.setParameter('heightTo', filters.heightTo);
+    }
+
+    // Диапазоны для weight
+    if (filters?.weightFrom !== undefined) {
+      queryBuilder.andWhere('player.weight >= :weightFrom');
+      queryBuilder.setParameter('weightFrom', filters.weightFrom);
+    }
+
+    if (filters?.weightTo !== undefined) {
+      queryBuilder.andWhere('player.weight <= :weightTo');
+      queryBuilder.setParameter('weightTo', filters.weightTo);
     }
 
     // Диапазоны для currentLevel
@@ -169,10 +190,12 @@ export class PlayersService {
   }
 
   async create(createPlayerDto: CreatePlayerDto): Promise<Player> {
-    // Преобразуем строковые даты в Date объекты
+    // Преобразуем строковые даты в Date объекты (если переданы)
     const playerData = {
       ...createPlayerDto,
-      dateOfBirth: new Date(createPlayerDto.dateOfBirth),
+      dateOfBirth: createPlayerDto.dateOfBirth
+        ? new Date(createPlayerDto.dateOfBirth)
+        : null,
       contractExpires: createPlayerDto.contractExpires
         ? new Date(createPlayerDto.contractExpires)
         : null,

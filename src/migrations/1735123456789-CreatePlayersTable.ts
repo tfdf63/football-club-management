@@ -129,18 +129,39 @@ export class CreatePlayersTable1735123456789 implements MigrationInterface {
           {
             name: 'mainPosition',
             type: 'enum',
-            enum: ['goalkeeper', 'defender', 'midfielder', 'forward', 'winger', 'striker'],
+            enum: [
+              'goalkeeper',
+              'defender',
+              'midfielder',
+              'forward',
+              'winger',
+              'striker',
+            ],
           },
           {
             name: 'position2',
             type: 'enum',
-            enum: ['goalkeeper', 'defender', 'midfielder', 'forward', 'winger', 'striker'],
+            enum: [
+              'goalkeeper',
+              'defender',
+              'midfielder',
+              'forward',
+              'winger',
+              'striker',
+            ],
             isNullable: true,
           },
           {
             name: 'position3',
             type: 'enum',
-            enum: ['goalkeeper', 'defender', 'midfielder', 'forward', 'winger', 'striker'],
+            enum: [
+              'goalkeeper',
+              'defender',
+              'midfielder',
+              'forward',
+              'winger',
+              'striker',
+            ],
             isNullable: true,
           },
           {

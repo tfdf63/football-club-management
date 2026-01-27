@@ -19,8 +19,9 @@ export class CreatePlayerDto {
   @IsNotEmpty()
   fullName: string;
 
+  @IsOptional()
   @IsDateString()
-  dateOfBirth: string;
+  dateOfBirth?: string;
 
   @IsOptional()
   @IsUrl()
@@ -30,8 +31,9 @@ export class CreatePlayerDto {
   @IsUrl()
   photoUrl?: string;
 
+  @IsOptional()
   @IsEnum(CountryEnum)
-  country: CountryEnum;
+  country?: CountryEnum;
 
   @IsOptional()
   @IsString()
@@ -60,32 +62,37 @@ export class CreatePlayerDto {
   @IsEnum(PlayerPosition)
   position3?: PlayerPosition;
 
+  @IsOptional()
   @IsNumber()
   @Min(100)
   @Max(250)
-  height: number; // в сантиметрах
+  height?: number; // в сантиметрах
 
+  @IsOptional()
   @IsNumber()
   @Min(30)
   @Max(200)
-  weight: number; // в килограммах
+  weight?: number; // в килограммах
 
+  @IsOptional()
   @IsEnum(PlayerFoot)
-  foot: PlayerFoot;
+  foot?: PlayerFoot;
 
   @IsOptional()
   @IsDateString()
   contractExpires?: string;
 
+  @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(10)
-  currentLevel: number; // от 0 до 10
+  currentLevel?: number; // от 0 до 10
 
+  @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(10)
-  potential: number; // от 0 до 10
+  potential?: number; // от 0 до 10
 
   @IsOptional()
   @IsBoolean()

@@ -17,8 +17,8 @@ export class Player {
   @Column({ type: 'varchar', length: 255 })
   fullName: string;
 
-  @Column({ type: 'date' })
-  dateOfBirth: Date;
+  @Column({ type: 'date', nullable: true })
+  dateOfBirth: Date | null;
 
   @Column({ type: 'varchar', length: 500, nullable: true })
   transfermarktLink: string | null;
@@ -29,8 +29,9 @@ export class Player {
   @Column({
     type: 'enum',
     enum: CountryEnum,
+    nullable: true,
   })
-  country: CountryEnum;
+  country: CountryEnum | null;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   city: string | null;
@@ -47,12 +48,14 @@ export class Player {
   @Column({
     type: 'enum',
     enum: PlayerPosition,
+    enumName: 'player_position_enum',
   })
   mainPosition: PlayerPosition;
 
   @Column({
     type: 'enum',
     enum: PlayerPosition,
+    enumName: 'player_position_enum',
     nullable: true,
   })
   position2: PlayerPosition | null;
@@ -60,30 +63,32 @@ export class Player {
   @Column({
     type: 'enum',
     enum: PlayerPosition,
+    enumName: 'player_position_enum',
     nullable: true,
   })
   position3: PlayerPosition | null;
 
-  @Column({ type: 'integer' })
-  height: number; // в сантиметрах
+  @Column({ type: 'integer', nullable: true })
+  height: number | null; // в сантиметрах
 
-  @Column({ type: 'integer' })
-  weight: number; // в килограммах
+  @Column({ type: 'integer', nullable: true })
+  weight: number | null; // в килограммах
 
   @Column({
     type: 'enum',
     enum: PlayerFoot,
+    nullable: true,
   })
-  foot: PlayerFoot;
+  foot: PlayerFoot | null;
 
   @Column({ type: 'date', nullable: true })
   contractExpires: Date | null;
 
-  @Column({ type: 'integer' })
-  currentLevel: number; // от 0 до 10
+  @Column({ type: 'integer', nullable: true })
+  currentLevel: number | null; // от 0 до 10
 
-  @Column({ type: 'integer' })
-  potential: number; // от 0 до 10
+  @Column({ type: 'integer', nullable: true })
+  potential: number | null; // от 0 до 10
 
   @Column({ type: 'boolean', default: false })
   shortlist: boolean;
